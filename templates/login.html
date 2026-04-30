@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <title>Iniciar Sesión | DeCoDe</title>
+  </head>
+  <body class="auth-container">
+    <div class="auth-wrapper">
+      <div class="glass-card auth-card">
+        <div class="auth-header">
+          <div class="auth-logo">
+            DeCoDe <span style="color: var(--text-main)">{ }</span>
+          </div>
+          <h2 style="color: var(--text-main)">¡Hola de nuevo!</h2>
+          <p style="color: var(--text-muted)">
+            Accede a tu máster de especialización
+          </p>
+        </div>
+
+        <a
+          href="{{ url_for('login_google') }}"
+          class="btn-dynamic google-btn-outline"
+        >
+          <img
+            src="https://virtual.autonoma.edu.pe/Campus/assets/img/icono/google.png"
+            width="18"
+          />
+          Continuar con Google
+        </a>
+
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            margin: 1.5rem 0;
+            gap: 10px;
+          "
+        >
+          <div style="flex: 1; height: 1px; background: var(--border)"></div>
+          <span
+            style="
+              font-size: 0.75rem;
+              color: var(--text-muted);
+              text-transform: uppercase;
+            "
+            >o con tu correo</span
+          >
+          <div style="flex: 1; height: 1px; background: var(--border)"></div>
+        </div>
+
+        <form method="POST">
+          <div class="input-group">
+            <label>Correo Electrónico</label>
+            <input
+              type="email"
+              name="email"
+              class="input-field"
+              placeholder="correoelectrónico@gmail.com"
+              required
+            />
+          </div>
+          <div class="input-group">
+            <label>Contraseña</label>
+            <input
+              type="password"
+              name="password"
+              class="input-field"
+              placeholder="••••••••"
+              required
+            />
+          </div>
+          <button type="submit" class="btn-dynamic btn-full">
+            Entrar a mi Aula
+          </button>
+        </form>
+
+        <div class="auth-footer">
+          ¿Nuevo aquí? <a href="/register">Regístrate gratis</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+//Developer: Jhonn Pether

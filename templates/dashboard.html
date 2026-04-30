@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>DeCoDe Virtual</title>
+</head>
+<body class="dashboard-layout">
+
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-logo">
+                DeCoDe <span style="color: var(--primary);">{ }</span>
+            </div>
+            <button class="mobile-close" onclick="toggleSidebar()"><i class="fas fa-times"></i></button>
+        </div>
+
+        <div class="profile-section">
+            <div class="avatar-container">
+                <img src="{{ current_user.picture or 'https://ui-avatars.com/api/?name=' + current_user.username }}" 
+                     class="avatar-main" alt="Perfil">
+                <div class="status-indicator"></div>
+            </div>
+            <p class="welcome-text">Bienvenido,</p>
+            <p class="user-name"><strong>{{ current_user.username }}</strong></p>
+        </div>
+
+        <nav class="sidebar-menu">
+            <ul>
+                <li><a href="/dashboard" class="menu-item active"><i class="fas fa-book-open"></i> Mis Cursos</a></li>
+                <li><a href="#actividades" class="menu-item"><i class="fas fa-history"></i> Actividad</a></li>
+                <li><a href="#certificados" class="menu-item"><i class="fas fa-certificate"></i> Certificados</a></li>
+                <li><a href="/" class="menu-item"><i class="fas fa-search"></i> Catálogo</a></li>
+            </ul>
+            <div class="menu-footer">
+                <a href="/logout" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
+            </div>
+        </nav>
+
+        <div class="theme-toggle-container">
+            <button class="theme-switch" id="themeBtn">
+                <span id="themeIcon">🌙</span> <span>Cambiar Modo</span>
+            </button>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <header class="mobile-header">
+            <button class="menu-toggle" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+            <span class="mobile-logo">DeCoDe</span>
+            <img src="{{ current_user.picture or 'https://ui-avatars.com/api/?name=' + current_user.username }}" class="avatar-sm">
+        </header>
+
+        <section class="content-header">
+            <h1>Panel de Control</h1>
+            <p class="text-muted">Gestiona tus cursos y revisa tus logros obtenidos.</p>
+        </section>
+
+        <div class="dashboard-grid">
+            
+            <div class="section-container courses-section">
+                <div class="section-title">
+                    <h2><i class="fas fa-graduation-cap"></i> Cursos en curso</h2>
+                    <span class="count-badge">{{ courses|length }}</span>
+                </div>
+                <div class="courses-grid">
+                    {% for course in courses %}
+                    <div class="course-card">
+                        <div class="card-img">
+                            <img src="{{ course.image }}" alt="{{ course.name }}">
+                            <div class="category-tag">{{ course.category }}</div>
+                        </div>
+                        <div class="card-body">
+                            <h3>{{ course.name }}</h3>
+                            <div class="progress-container">
+                                <div class="progress-text">
+                                    <span>Progreso actual</span>
+                                    <span class="percent">45%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 45%;"></div>
+                                </div>
+                            </div>
+                            <div class="card-actions">
+                                <a href="/examen/{{ course.id }}" class="btn-action primary">Continuar <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="side-sections">
+                
+                <div id="actividades" class="section-container mini-section">
+                    <div class="section-title">
+                        <h3><i class="fas fa-bolt"></i> Actividad Reciente</h3>
+                    </div>
+                    <div class="activity-list">
+                        <div class="activity-item">
+                            <div class="activity-icon blue"><i class="fas fa-play"></i></div>
+                            <div class="activity-info">
+                                <p>Continuaste <strong>Python Pro</strong></p>
+                                <small>Hace 2 horas</small>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon green"><i class="fas fa-check"></i></div>
+                            <div class="activity-info">
+                                <p>Completaste examen de <strong>UI/UX</strong></p>
+                                <small>Ayer, 18:30</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="certificados" class="section-container mini-section">
+                    <div class="section-title">
+                        <h3><i class="fas fa-award"></i> Mis Certificados</h3>
+                    </div>
+                    <div class="certificates-list">
+                        <div class="cert-item">
+                            <div class="cert-info">
+                                <p>Fundamentos de Web Design</p>
+                                <small>Emitido: 10/04/2026</small>
+                            </div>
+                            <button class="btn-download"><i class="fas fa-download"></i></button>
+                        </div>
+                        <p class="empty-text text-muted">Aún no tienes certificados disponibles.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Manejo del Menú Lateral en Móviles
+        function toggleSidebar() {
+            document.querySelector('.sidebar').classList.toggle('active');
+        }
+
+        // Sistema de Modo Oscuro / Claro
+        const themeBtn = document.getElementById('themeBtn');
+        const themeIcon = document.getElementById('themeIcon');
+        const currentTheme = localStorage.getItem('theme') || 'light';
+
+        document.documentElement.setAttribute('data-theme', currentTheme);
+        themeIcon.innerText = currentTheme === 'light' ? '🌙' : '☀️';
+
+        themeBtn.addEventListener('click', () => {
+            let theme = document.documentElement.getAttribute('data-theme');
+            let newTheme = theme === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            themeIcon.innerText = newTheme === 'light' ? '🌙' : '☀️';
+        });
+
+        // Simulación de progreso dinámico al cargar (Opcional)
+        window.addEventListener('load', () => {
+            console.log("Panel de control cargado - Monitoreando actividad.");
+        });
+    </script>
+</body>
+</html>
+
+//Developer: Jhonn Pether

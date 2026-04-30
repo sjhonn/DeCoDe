@@ -1,0 +1,19 @@
+<button class="theme-toggle" id="themeBtn">🌓</button>
+
+<script>
+    const btn = document.getElementById('themeBtn');
+    const currentTheme = localStorage.getItem('theme') || 'light';
+    
+    // Aplicar el tema guardado al cargar
+    document.documentElement.setAttribute('data-theme', currentTheme);
+
+    btn.addEventListener('click', () => {
+        let theme = document.documentElement.getAttribute('data-theme');
+        let newTheme = theme === 'light' ? 'dark' : 'light';
+        
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+    });
+</script>
+
+//Developer: Jhonn Pether

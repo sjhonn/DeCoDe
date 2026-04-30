@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <title>Crear Cuenta | DeCoDe</title>
+  </head>
+  <body class="auth-container">
+    <div class="auth-wrapper">
+      <div class="glass-card auth-card">
+        <div class="auth-header">
+          <div class="auth-logo">
+            DeCoDe <span style="color: var(--text-main)">{ }</span>
+          </div>
+          <h2 style="color: var(--text-main)">Crea tu cuenta</h2>
+          <p style="color: var(--text-muted)">
+            Empieza hoy tu formación técnica
+          </p>
+        </div>
+
+        <form method="POST">
+          <div class="input-group">
+            <label>Nombre de Usuario</label>
+            <input
+              type="text"
+              name="username"
+              class="input-field"
+              placeholder="Ejm. Jhonn Pether"
+              required
+            />
+          </div>
+          <div class="input-group">
+            <label>Correo Electrónico</label>
+            <input
+              type="email"
+              name="email"
+              class="input-field"
+              placeholder="correoelectrónico@gmail.com"
+              required
+            />
+          </div>
+          <div class="input-group">
+            <label>Contraseña</label>
+            <input
+              type="password"
+              name="password"
+              class="input-field"
+              placeholder="Crea una contraseña segura"
+              required
+            />
+          </div>
+          <button type="submit" class="btn-dynamic btn-full">
+            Comenzar mi camino
+          </button>
+        </form>
+
+        <div class="auth-footer">
+          ¿Ya eres miembro? <a href="/login">Inicia sesión</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+//Developer: Jhonn Pether

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>DeCoDe { }
+    </title>
+</head>
+<body class="dashboard-layout">
+
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-logo">DeCoDe <span style="color: var(--primary);">{ }</span></div>
+        </div>
+
+        <div class="profile-section">
+            <h3>Catalogo</h3>
+            <p class="text-muted">Encuentra tu próximo reto</p>
+        </div>
+
+        <nav class="sidebar-menu">
+            <form action="/" method="GET" style="padding: 10px;">
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <label style="font-size: 0.8rem; color: var(--text-muted);">BUSCAR</label>
+                    <input type="text" name="search" class="form-control" placeholder="Ej: Python..." style="width: 100%;">
+                </div>
+
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <label style="font-size: 0.8rem; color: var(--text-muted);">CATEGORÍA</label>
+                    <select name="category" class="form-control" style="width: 100%;">
+                        <option value="">Todas</option>
+                        <option value="Programación">Programación</option>
+                        <option value="Data Science">Data Science</option>
+                        <option value="Diseño UI/UX">Diseño UI/UX</option>
+                        <option value="Diseño UI/UX">Ciberseguridad</option>
+                        <option value="Marketing Digital">Marketing Digital</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn-dynamic" style="width: 100%;">
+                    <i class="fas fa-filter"></i> Aplicar Filtros
+                </button>
+            </form>
+            
+            <div style="margin-top: 20px;">
+                <a href="/dashboard" class="menu-item">
+                    <i class="fas fa-th-large"></i> Mi Aula Virtual
+                </a>
+            </div>
+        </nav>
+
+        <div class="theme-toggle-container" style="margin-top: auto;">
+            <button class="theme-switch" id="themeBtn" style="width: 100%;">
+                <span id="themeIcon">🌙</span> Modo
+            </button>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <header class="content-header" style="display: flex; justify-content: space-between; align-items: center;">
+            <div>
+                <h1>Catálogo de Cursos</h1>
+                <p class="text-muted">Mostrando {{ courses|length }} especialidades disponibles</p>
+            </div>
+            {% if not current_user.is_authenticated %}
+                <a href="/login" class="btn-dynamic">Iniciar Sesión</a>
+            {% endif %}
+        </header>
+
+        <div class="courses-grid" style="margin-top: 30px;">
+            {% for course in courses %}
+            <div class="course-card">
+                <div class="card-img">
+                    <img src="{{ course.image }}" alt="{{ course.name }}">
+                    <div class="category-tag">{{ course.category }}</div>
+                </div>
+                <div class="card-body">
+                    <h3 style="font-size: 1.1rem; margin-bottom: 10px;">{{ course.name }}</h3>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
+                        <span style="font-size: 1.2rem; font-weight: 800; color: var(--primary);">${{ course.price }}</span>
+                        <a href="/examen/{{ course.id }}" class="btn-action primary" style="text-decoration: none; padding: 8px 15px; border-radius: 8px; font-size: 0.9rem;">Ver Detalles</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </main>
+
+    <script>
+        // Mismo script de tema para consistencia
+        const themeBtn = document.getElementById('themeBtn');
+        const themeIcon = document.getElementById('themeIcon');
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', currentTheme);
+        themeIcon.innerText = currentTheme === 'light' ? '🌙' : '☀️';
+
+        themeBtn.addEventListener('click', () => {
+            let theme = document.documentElement.getAttribute('data-theme');
+            let newTheme = theme === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            themeIcon.innerText = newTheme === 'light' ? '🌙' : '☀️';
+        });
+    </script>
+</body>
+</html>
+
+//Developer: Jhonn Pether

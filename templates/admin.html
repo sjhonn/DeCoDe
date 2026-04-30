@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header><h1>Admin Panel</h1></header>
+    <div style="padding: 20px;">
+        <h3>Lista de Cursos en Venta</h3>
+        <ul>
+            {% for c in courses %}
+            <li>{{ c.name }} - ${{ c.price }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
+
+//Developer: Jhonn Pether

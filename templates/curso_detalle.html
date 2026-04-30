@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header><h1>Detalles del Curso</h1> <a href="/" class="btn">Catálogo</a></header>
+    <div class="container" style="display:block; max-width:800px; margin:auto;">
+        <div class="card" style="display:flex; padding:40px; gap:30px; text-align:left;">
+            <img src="{{ course.image }}" style="width:300px; height:auto;">
+            <div>
+                <h2>{{ course.name }}</h2>
+                <p>Categoría: {{ course.category }}</p>
+                <p>Aprende de forma profesional con DeCoDe.</p>
+                <h3 style="color:var(--success)">${{ course.price }}</h3>
+                <button onclick="pagar({{course.id}}, {{course.price}}, '{{course.name}}')" class="btn btn-success">Comprar Ahora</button>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
+
+//Developer: Jhonn Pether

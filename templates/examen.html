@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Evaluación | DeCoDe</title>
+    <style>
+        .exam-layout {
+            display: grid;
+            grid-template-columns: 300px 1fr; /* Barra lateral y contenido */
+            min-height: 100vh;
+            background: var(--bg-body);
+        }
+
+        /* Barra Lateral del Examen */
+        .exam-sidebar {
+            background: var(--bg-card);
+            border-right: 1px solid var(--border);
+            padding: 2rem;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Contenedor de Preguntas */
+        .questions-container {
+            padding: 3rem;
+            max-width: 900px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .question-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .option-label {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            margin-top: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+            color: var(--text-muted);
+        }
+
+        .option-label:hover {
+            background: var(--glass);
+            border-color: var(--primary);
+        }
+
+        /* Radio button oculto pero funcional */
+        input[type="radio"] {
+            accent-color: var(--primary);
+            width: 18px;
+            height: 18px;
+        }
+
+        .exam-header-info {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .instruction-tag {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--primary);
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="exam-layout">
+        <aside class="exam-sidebar">
+            <div class="sidebar-logo">DeCoDe <span style="color: var(--primary);">{ }</span></div>
+            
+            <div class="exam-header-info">
+                <i class="fas fa-file-alt" style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                <h3>Evaluación Final</h3>
+                <p style="color: var(--text-muted);">{{ course.name }}</p>
+            </div>
+
+            <div class="instruction-tag">
+                <i class="fas fa-info-circle"></i> Debes obtener al menos 8/10 para aprobar y obtener tu certificado.
+            </div>
+
+            <div style="margin-top: auto; width: 100%;">
+                <a href="/dashboard" class="btn-dynamic" style="width: 100%; background: var(--glass); color: var(--text-main);">
+                    <i class="fas fa-times"></i> Cancelar Examen
+                </a>
+            </div>
+        </aside>
+
+        <main class="questions-container">
+            <form action="{{ url_for('examen', course_id=course.id) }}" method="POST">
+                {% for i, q in enumerate(course.questions) %}
+                <div class="question-card">
+                    <h4 style="margin-bottom: 1.5rem;">
+                        <span style="color: var(--primary); margin-right: 10px;">{{ i + 1 }}.</span> {{ q.q }}
+                    </h4>
+                    
+                    <div class="options-grid">
+                        {% for option in q.options %}
+                        <label class="option-label">
+                            <input type="radio" name="q{{ i }}" value="{{ option }}" required>
+                            <span>{{ option }}</span>
+                        </label>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endfor %}
+
+                <button type="submit" class="btn-dynamic" style="width: 100%; padding: 20px; font-size: 1.1rem; margin-top: 2rem;">
+                    <i class="fas fa-paper-plane"></i> Finalizar y Enviar Evaluación
+                </button>
+            </form>
+        </main>
+    </div>
+</body>
+</html>
+
+//Developer: Jhonn Pether
