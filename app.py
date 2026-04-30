@@ -20,9 +20,9 @@ login_manager.login_view = 'login'
 oauth = OAuth(app)
 google = oauth.register(
     name='google',
-    CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID"), # <--- CONFIGURACIÓN DE GOOGLE OAUTH DE GCP --->
-    client_secret=os.getenv("GOOGLE_CLIENT_SECRET"), # <--- CONFIGURACIÓN DE GOOGLE OAUTH DE GCP --->
-    server_metadata_url=os.getenv("GOOGLE_SERVER_METADATA_URL"), # <--- CONFIGURACIÓN DE GOOGLE OAUTH DE GCP --->
+    CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID"), # <--- REEMPLAZAR LA CONFIGURACIÓN DE GOOGLE OAUTH DE GCP, el mio es 285685570870-kclmvlbsjvprgmk6pjf58dhmerfdsdp7.apps.googleusercontent.com---
+    client_secret=os.getenv("GOOGLE_CLIENT_SECRET"), # <--- REEMPLAZAR LA CONFIGURACIÓN DE GOOGLE OAUTH DE GCP, el mio es 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---
+    server_metadata_url=os.getenv("GOOGLE_SERVER_METADATA_URL"), # <--- REEMPLAZAR LA CONFIGURACIÓN DE GOOGLE OAUTH DE GCP, el mio es https://accounts.google.com/.well-known/openid-configuration ---
     client_kwargs={'scope': 'openid email profile'}
 )
 
