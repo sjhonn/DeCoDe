@@ -1,11 +1,11 @@
-# 🎓 DeCoDe Academy - Master Learning Platform
+# 🎓 DeCoDe
 
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 ![Flask](https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white)
 ![SQLite](https://img.shields.io/badge/sqlite-%2307405e.svg?style=for-the-badge&logo=sqlite&logoColor=white)
 ![License](https://img.shields.io/badge/license-MIT-blue.svg?style=for-the-badge)
 
-**DeCoDe Academy** es una plataforma educativa Full-Stack orientada a la especialización técnica. Permite a los usuarios inscribirse en másters de tecnología, realizar exámenes de alto nivel y obtener certificaciones oficiales automáticas.
+**DeCoDe** es una plataforma educativa Full-Stack orientada a la especialización técnica. Permite a los usuarios inscribirse en másters de tecnología, realizar exámenes de alto nivel y obtener certificaciones oficiales automáticas.
 
 ---
 
@@ -33,8 +33,8 @@
 
 1. **Clona este repositorio:**
    ```bash
-   git clone [https://github.com/tu-usuario/decode-academy.git](https://github.com/tu-usuario/decode-academy.git)
-   cd decode-academy
+   git clone [https://github.com/tu-usuario/DeCoDe.git](https://github.com/tu-usuario/DeCoDe.git)
+   cd DeDoDe
    ```
 2. **Prepara el entorno:**
     ```bash
@@ -56,7 +56,3 @@
 📝 Licencia
 Este proyecto está bajo la Licencia MIT - Siéntete libre de usarlo para aprender o como base para tus propios proyectos.
 Desarrollado por Pitxgoras - 2026
-### 💡 Recomendación final para GitHub:
-Una vez que subas los archivos, ve a la pestaña de **Settings** de tu repositorio en GitHub y añade una descripción corta y etiquetas (tags) como: `python`, `flask`, `web-development`, `education`. Esto ayudará a que más personas encuentren tu proyecto.
-
-¡Con esto ya tienes el kit completo para ser un desarrollador profesional! 🚀✨
